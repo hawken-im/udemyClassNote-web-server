@@ -19,6 +19,7 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(publicDirectoryPath))
 
 app.get('',(req,res)=>{
+
     res.render('index',{
         title:'Weather App',
         name:'Hawken'
@@ -26,6 +27,7 @@ app.get('',(req,res)=>{
 })
 
 app.get('/about',(req,res)=>{
+//    console.log(req.route.path)
     res.render('about',{
         title:'About Me',
         name:'Hawken'
@@ -40,9 +42,38 @@ app.get('/help',(req,res)=>{
     })
 })
 
+
+app.get('/help/*',(req,res)=>{
+    res.render('404page',{
+        title:'404',
+        errmsg:'help page not found',
+        name:'Hawken'
+    })
+})
+
 app.get('/weather',(_,res)=>{
     //console.log('some request:',req)
     res.send({weather:'hot'})
+})
+
+app.get('/products',(req,res)=>{
+    if(!req.query.search){
+        return res.send({
+            error:'No search term. Please provide.'
+        })
+    }
+    console.log(req.query.search)
+    res.send({
+        products:[]
+    })
+})
+
+app.get('*',(req,res)=>{
+    res.render('404page',{
+        title:'404',
+        errmsg:'page not found',
+        name:'Hawken'
+    })
 })
 
 app.listen(3000,()=>{
