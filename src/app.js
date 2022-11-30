@@ -51,10 +51,20 @@ app.get('/help/*',(req,res)=>{
     })
 })
 
-app.get('/weather',(_,res)=>{
+app.get('/weather',(req,res)=>{
     //console.log('some request:',req)
-    res.send({weather:'hot'})
+    if(!req.query.address){
+        return res.send({
+            error:'No address provided.'
+        })
+    }
+    res.send({
+        weather:'hot',
+        address: req.query.address
+    })
 })
+
+
 
 app.get('/products',(req,res)=>{
     if(!req.query.search){
