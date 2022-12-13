@@ -2,6 +2,8 @@ const path = require('path')
 const express = require('express')
 const res = require('express/lib/response')
 const hbs = require('hbs')
+const geocode = require('./utils/geocode')
+const weather = require('./utils/weather')
 
 const app = express()
 
@@ -58,10 +60,15 @@ app.get('/weather',(req,res)=>{
             error:'No address provided.'
         })
     }
-    res.send({
-        weather:'hot',
-        address: req.query.address
+
+    geocode(req.query.address,()=>{
+        
     })
+
+    // res.send({
+    //     weather:'hot',
+    //     address: req.query.address
+    // })
 })
 
 
