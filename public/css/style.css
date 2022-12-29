@@ -50,3 +50,16 @@ header a:hover{
 .portrait{
     height: 300px;
 }
+
+input{
+    border: 1px solid #333333;
+    padding: 8px;
+}
+
+button{
+    cursor: pointer;
+    border: 1px solid #888888;
+    background: #888888;
+    color: white;
+    padding: 8px;
+}
